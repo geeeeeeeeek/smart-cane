@@ -85,26 +85,30 @@ if __name__ == '__main__':
     # Wait a spell
     time.sleep(0.2)
 
-    # Send "start capture" message
-    sendbyte(port, 1)
+    while True:
+        ack = port.readline().decode()
 
-    dump('\nWriting file %s (may appear upside-down) ...' % OUTFILENAME)
+        if ack == 'capture enabled\r\n':
+            print(ack)
+            # Send "start capture" message
+            sendbyte(port, 1)
 
-    # Open output file
-    outfile = open(OUTFILENAME, 'wb')
+            dump('\nWriting file %s (may appear upside-down) ...' % OUTFILENAME)
 
-    # Write BMP header
-    outfile.write(bytearray(header))
+            # Open output file
+            outfile = open(OUTFILENAME, 'wb')
 
-    # Read bytes from serial and write them to file
-    for k in range(320*240):
-        c = outfile.write(port.read(2))
+            # Write BMP header
+            outfile.write(bytearray(header))
 
-    # Send "stop" message
-    sendbyte(port, 0)
+            # Read bytes from serial and write them to file
+            for k in range(320*240):
+                c = outfile.write(port.read(2))
 
-    # Close output file
-    outfile.close()
+            # Send "stop" message
+            sendbyte(port, 0)
 
-    print('\nDone')
+            # Close output file
+            outfile.close()
 
+            print('\nDone')
