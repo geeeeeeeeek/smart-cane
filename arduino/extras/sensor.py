@@ -75,7 +75,7 @@ header = [
 ]
 
 # main ------------------------------------------------------------------------------
-MIN_DISTANCE_TO_ALERT = 5
+MIN_DISTANCE_TO_ALERT = 10
 
 
 def audio_output(content):

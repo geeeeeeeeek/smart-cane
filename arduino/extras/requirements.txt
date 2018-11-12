@@ -6,4 +6,5 @@ pillow
 matplotlib
 h5py
 keras
+pyserial
 https://github.com/OlafenwaMoses/ImageAI/releases/download/2.0.2/imageai-2.0.2-py3-none-any.whl; sys_platform == "darwin"

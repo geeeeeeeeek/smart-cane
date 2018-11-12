@@ -75,7 +75,7 @@ header = [
 ]
 
 # main ------------------------------------------------------------------------------
-MIN_DISTANCE_TO_ALERT = 5
+MIN_DISTANCE_TO_ALERT = 10
 
 
 def audio_output(content):
@@ -110,7 +110,10 @@ def handle_camera_output(line):
 
         detections = detect(OUTFILENAME)
         objects = ','.join(eachObject['name'] for eachObject in detections)
-        audio_output('{} are in front of you'.format(objects))
+        if not len(objects):
+            audio_output('Nothing in front of you')
+        else:
+            audio_output('{} in front of you'.format(objects))
 
 
 def handle_sensor_output(line):
@@ -150,8 +153,8 @@ if __name__ == '__main__':
 
     while True:
         # getack(sensorPort)
-        # cameraAck = cameraPort.readline().decode()
-        sensorAck = sensorPort.readline().decode()
+        cameraAck = cameraPort.readline().decode()
+        # sensorAck = sensorPort.readline().decode()
 
-        handle_sensor_output(sensorAck)
-        # handle_camera_output(cameraAck)
+        # handle_sensor_output(sensorAck)
+        handle_camera_output(cameraAck)
