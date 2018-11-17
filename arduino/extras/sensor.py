@@ -29,8 +29,9 @@ from detection import *
 
 # PORT = '/dev/ttyACM0' # Ubuntu
 # PORT = 'COM9'         # Windows
-CAMERA_PORT = '/dev/tty.usbmodem144101'
-SENSOR_PORT = '/dev/tty.usbmodem14301'
+# CAMERA_PORT = '/dev/tty.usbmodem144101'
+# SENSOR_PORT = '/dev/tty.usbmodem143101'
+SENSOR_PORT = '/dev/tty.usbmodem142401'
 
 CAMERA_BAUD = 921600
 SENSOR_BAUD = 9600
@@ -75,7 +76,7 @@ header = [
 ]
 
 # main ------------------------------------------------------------------------------
-MIN_DISTANCE_TO_ALERT = 10
+MIN_DISTANCE_TO_ALERT = 100
 
 
 def audio_output(content):
@@ -137,13 +138,13 @@ def handle_sensor_output(line):
 if __name__ == '__main__':
 
     # Open connection to Arduino with a timeout of two seconds
-    cameraPort = serial.Serial(CAMERA_PORT, CAMERA_BAUD, timeout=2)
+    # cameraPort = serial.Serial(CAMERA_PORT, CAMERA_BAUD, timeout=2)
     sensorPort = serial.Serial(SENSOR_PORT, SENSOR_BAUD, timeout=2)
 
-    dump('Starting capture ...')
+    # dump('Starting capture ...')
 
     # Report acknowledgment from camera
-    getack(cameraPort)
+    # getack(cameraPort)
 
     # Wait a spell
     time.sleep(0.2)

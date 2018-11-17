@@ -29,8 +29,9 @@ from detection import *
 
 # PORT = '/dev/ttyACM0' # Ubuntu
 # PORT = 'COM9'         # Windows
-CAMERA_PORT = '/dev/tty.usbmodem144101'
-SENSOR_PORT = '/dev/tty.usbmodem14301'
+CAMERA_PORT = '/dev/tty.usbmodem142401'
+# CAMERA_PORT = '/dev/tty.usbmodem14401'
+# SENSOR_PORT = '/dev/tty.usbmodem143101'
 
 CAMERA_BAUD = 921600
 SENSOR_BAUD = 9600
@@ -141,7 +142,7 @@ if __name__ == '__main__':
 
     # Open connection to Arduino with a timeout of two seconds
     cameraPort = serial.Serial(CAMERA_PORT, CAMERA_BAUD, timeout=2)
-    sensorPort = serial.Serial(SENSOR_PORT, SENSOR_BAUD, timeout=2)
+    # sensorPort = serial.Serial(SENSOR_PORT, SENSOR_BAUD, timeout=2)
 
     dump('Starting capture ...')
 

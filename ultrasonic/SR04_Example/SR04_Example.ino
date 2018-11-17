@@ -20,9 +20,12 @@ void loop() {
    a=sr04.Distance();
    b=sr04_2.Distance();
 
-   Serial.print(a);
-   Serial.print(";");
-   Serial.print(b);
-   Serial.println("\n");
-   delay(500);
+   if (a < 100 || b < 100) {
+    Serial.print(a);
+     Serial.print(";");
+     Serial.print(b);
+     Serial.println("\n");
+     delay(2000);
+   }
+  delay(100);
 }
