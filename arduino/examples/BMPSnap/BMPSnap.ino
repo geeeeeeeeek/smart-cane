@@ -23,16 +23,24 @@ along with BreezyArduCAM.  If not, see <http://www.gnu.org/licenses/>.
 #include <SPI.h>
 
 // set pin 10 as the slave select for the digital pot:
-static const int CS = 10;
+static const int CS = 7;
+
+// btn pin
+static const int btn_pin = 6;
 
 Serial_ArduCAM_FrameGrabber fg;
 
 /* Choose your camera */
-//ArduCAM_Mini_2MP myCam(CS, &fg);
-ArduCAM_Mini_5MP myCam(CS, &fg);
+ArduCAM_Mini_2MP myCam(CS, &fg);
+//ArduCAM_Mini_5MP myCam(CS, &fg);
 
-void setup(void) 
+bool enabled = false;
+
+void setup(void)
 {
+
+    pinMode(btn_pin, INPUT_PULLUP);
+
     // ArduCAM Mini uses both I^2C and SPI buses
     Wire.begin();
     SPI.begin();
@@ -40,11 +48,31 @@ void setup(void)
     // Fastest baud rate (change to 115200 for Due)
     Serial.begin(921600);
 
+
+    myCam.wrSensorReg8_8(0xff, 0x00);
+    myCam.wrSensorReg8_8(0x7c, 0x00);
+    myCam.wrSensorReg8_8(0x7d, 0x04);
+    myCam.wrSensorReg8_8(0x7c, 0x09);
+    myCam.wrSensorReg8_8(0x7d, 0x90);
+    myCam.wrSensorReg8_8(0x7d, 0x00);
+
     // Begin capturing in  QVGA mode
     myCam.beginQvga();
 }
 
-void loop(void) 
+void loop(void)
 {
-    myCam.capture();
+    if (digitalRead(btn_pin) == LOW) {
+        enabled = !enabled;
+        if (enabled) {
+          Serial.println(F("capture enabled"));
+        } else {
+          Serial.println(F("capture disabled"));
+        }
+        delay(1000);
+    }
+
+    if (enabled) {
+      myCam.capture();
+    }
 }

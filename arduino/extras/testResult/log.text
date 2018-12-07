@@ -1,0 +1,22 @@
+2018-11-16 21:53:30.160863: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+Modelresnet50_coco_best_v2.0.1.h5
+time of processing image: testImage1.png
+13.00222110748291
+Modelresnet50_coco_best_v2.0.1.h5
+time of processing image: testImage2.png
+15.372067928314209
+Modelyolo.h5
+time of processing image: testImage1.png
+20.749125957489014
+Modelyolo.h5
+time of processing image: testImage2.png
+24.080127954483032
+Modelyolo-tiny.h5
+time of processing image: testImage2.png
+16.093573808670044
+Modelyolo-tiny.h5
+time of processing image: testImage1.png
+14.817559957504272
+
+Process finished with exit code 0
+
